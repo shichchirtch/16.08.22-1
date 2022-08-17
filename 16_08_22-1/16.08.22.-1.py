@@ -15,7 +15,7 @@ class Track:
     def __len__(self):
         if len(self.arr) == 0:
             print("Движения нет !")
-            return
+            return 0
         distance = 0
         x1, y1 = self.start_x, self.start_y
         for obj in self.arr:
