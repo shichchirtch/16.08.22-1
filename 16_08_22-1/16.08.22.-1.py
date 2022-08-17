@@ -11,17 +11,18 @@ class Track:
     def get_tracks(self):
         return tuple(self.arr)
 
-    def get_lenth(self, i):
-        return (((self.arr[i - 1].to_x - self.arr[i].to_x) ** 2 + (
-                    self.arr[i - 1].to_y - self.arr[i].to_y) ** 2) ** 0.5)
 
     def __len__(self):
-        len_1 = ((self.start_x - self.arr[0].to_x) ** 2 + (self.start_y - self.arr[0].to_y) ** 2) ** 0.5
-        s = 0
-        for i in range(1, len(self.arr)):
-            x = self.get_lenth(i)
-            s += x
-        return int(len_1 + s)
+        if len(self.arr) == 0:
+            print("Движения нет !")
+            return
+        distance = 0
+        x1, y1 = self.start_x, self.start_y
+        for obj in self.arr:
+            x2, y2 = obj.to_x, obj.to_y
+            distance += ((x1 - x2) ** 2 + (y1 - y2) ** 2) ** 0.5
+            x1, y1 = x2, y2
+        return int(distance)
 
     def __eq__(self, other):
         return len(self) == len(other)
